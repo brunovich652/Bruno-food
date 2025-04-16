@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Cliente y Jefe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .section {
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .products-table, .details-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .products-table th, .details-table th, .products-table td, .details-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .products-table th, .details-table th {
+            background-color: #f2f2f2;
+        }
+        .products-table tr:hover, .details-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Media Queries for Mobile */
+        @media only screen and (max-width: 600px) {
+            header h1 {
+                font-size: 20px;
+            }
+            .button {
+                width: 100%;
+                padding: 15px;
+            }
+            .section {
+                padding: 10px;
+            }
+            .products-table, .details-table {
+                font-size: 14px;
+            }
+            .products-table th, .details-table th {
+                font-size: 16px;
+            }
+            .products-table td, .details-table td {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bienvenido al Dashboard</h1>
+</header>
+
+<div class="container">
+    <!-- Login -->
+    <div class="section" id="login-section">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Usuario" /><br><br>
+        <input type="password" id="password" placeholder="Contraseña" /><br><br>
+        <button class="button" onclick="login()">Iniciar sesión</button>
+    </div>
+
+    <!-- Selección de rol -->
+    <div class="section" id="role-selection-section" style="display: none;">
+        <h2>¿Quién eres?</h2>
+        <button class="button" onclick="showCliente()">Cliente</button>
+        <button class="button" onclick="showJefe()">Jefe</button>
+    </div>
+
+    <!-- Vista Cliente -->
+    <div class="section" id="cliente-view" style="display: none;">
+        <h2>Productos</h2>
+        <table class="products-table">
+            <tr>
+                <th>Nombre del Producto</th>
+                <th>Precio</th>
+                <th>Ver Detalles</th>
+            </tr>
+            <tr>
+                <td>Producto A</td>
+                <td>$15.00</td>
+                <td><button class="button" onclick="viewProduct('Producto A')">Ver</button></td>
+            </tr>
+            <tr>
+                <td>Producto B</td>
+                <td>$25.00</td>
+                <td><button class="button" onclick="viewProduct('Producto B')">Ver</button></td>
+            </tr>
+        </table>
+        <div id="product-details" style="display: none;">
+            <h3>Detalles del Producto</h3>
+            <p id="product-description"></p>
+            <button class="button">Agregar al Carrito</button>
+        </div>
+    </div>
+
+    <!-- Vista Jefe -->
+    <div class="section" id="jefe-view" style="display: none;">
+        <h2>Dashboard Jefe</h2>
+        <p><strong>Ventas Hoy:</strong> $820</p>
+        <p><strong>Ventas Mes:</strong> $12,430</p>
+
+        <h3>Empleados</h3>
+        <table class="products-table">
+            <tr>
+                <th>Nombre</th>
+                <th>Puesto</th>
+                <th>Sueldo</th>
+            </tr>
+            <tr>
+                <td>Juan M.</td>
+                <td>Cajero</td>
+                <td>$750/mo</td>
+            </tr>
+            <tr>
+                <td>Ana L.</td>
+                <td>Cocinera</td>
+                <td>$850/mo</td>
+            </tr>
+        </table>
+
+        <h3>Gastos</h3>
+        <table class="products-table">
+            <tr>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Monto</th>
+            </tr>
+            <tr>
+                <td>Alquiler</td>
+                <td>2025-04-01</td>
+                <td>$1,200</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Dashboard</p>
+</footer>
+
+<script>
+    function login()
